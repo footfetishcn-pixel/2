@@ -34,7 +34,7 @@
     }
     .header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
     .header h1 {
       font-size: 22px;
@@ -48,27 +48,75 @@
       line-height: 1.5;
     }
 
-    /* 模式指示器 */
-    .mode-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+    /* Token 输入区 */
+    .token-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
       margin-bottom: 16px;
     }
-    .mode-badge.direct {
+    .token-card label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .token-status {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .token-status.empty {
+      background: #2d0d0d33;
+      color: var(--red);
+    }
+    .token-status.ok {
       background: #0d3d2e33;
       color: var(--green);
-      border: 1px solid #3fb95044;
     }
-    .mode-badge.script {
-      background: #1a2a4433;
+    .token-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+      outline: none;
+      resize: vertical;
+      min-height: 80px;
+      max-height: 200px;
+      line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+    .token-input:focus { border-color: var(--border-focus); }
+    .token-input::placeholder { color: #444; }
+    .token-hint {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #555;
+      line-height: 1.5;
+    }
+    .token-hint a {
       color: var(--blue);
-      border: 1px solid #58a6ff44;
+      text-decoration: none;
     }
+    .token-hint a:hover { text-decoration: underline; }
+    .btn-clear {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .btn-clear:hover { color: var(--text); background: var(--surface2); }
 
     /* 配置区 */
     .config-card {
@@ -78,11 +126,10 @@
       padding: 16px;
       margin-bottom: 16px;
     }
-    .config-card label {
-      display: block;
-      font-size: 12px;
+    .config-card .section-label {
+      font-size: 13px;
       color: var(--muted);
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       font-weight: 500;
     }
     .config-row {
@@ -92,6 +139,12 @@
     }
     .config-row:last-child { margin-bottom: 0; }
     .config-field { flex: 1; }
+    .config-field label {
+      display: block;
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 4px;
+    }
     select, input[type="text"] {
       width: 100%;
       background: var(--surface2);
@@ -103,14 +156,16 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    select:focus, input[type="text"]:focus {
-      border-color: var(--border-focus);
-    }
-    .promo-field {
-      margin-top: 10px;
+    select:focus, input[type="text"]:focus { border-color: var(--border-focus); }
+    .promo-field { margin-top: 10px; }
+    .promo-field label {
+      display: block;
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 4px;
     }
 
-    /* 按钮 */
+    /* 生成按钮 */
     .btn-primary {
       width: 100%;
       padding: 12px;
@@ -125,24 +180,7 @@
       margin-bottom: 12px;
     }
     .btn-primary:hover { opacity: 0.9; }
-    .btn-primary:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    .btn-secondary {
-      width: 100%;
-      padding: 10px;
-      background: var(--surface2);
-      color: var(--blue);
-      border: 1px solid #58a6ff44;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-bottom: 8px;
-    }
-    .btn-secondary:hover { background: #1c2a44; }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* 状态 */
     .status-box {
@@ -154,39 +192,48 @@
       display: none;
       word-break: break-all;
     }
-    .status-box.loading {
-      display: block;
-      background: #1a2a44;
-      color: var(--blue);
-      border: 1px solid #58a6ff33;
-    }
-    .status-box.success {
-      display: block;
-      background: #0d2d1e;
-      color: var(--green);
-      border: 1px solid #3fb95033;
-    }
-    .status-box.error {
-      display: block;
-      background: #2d0d0d;
-      color: var(--red);
-      border: 1px solid #f8514933;
-    }
+    .status-box.loading { display: block; background: #1a2a44; color: var(--blue); border: 1px solid #58a6ff33; }
+    .status-box.success { display: block; background: #0d2d1e; color: var(--green); border: 1px solid #3fb95033; }
+    .status-box.error { display: block; background: #2d0d0d; color: var(--red); border: 1px solid #f8514933; }
 
     /* 结果 */
-    .result-card {
-      background: var(--surface2);
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .result-item {
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 12px;
       margin-bottom: 8px;
-      display: none;
     }
-    .result-label {
+    .result-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .result-item-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .result-item-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-sm {
+      padding: 4px 10px;
+      border-radius: 4px;
       font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 6px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--blue);
+      transition: background 0.2s;
     }
+    .btn-sm:hover { background: #2a3a54; }
+    .btn-sm.green { color: var(--green); border-color: #3fb95044; }
+    .btn-sm.green:hover { background: #0d2d1e; }
     .result-url {
       font-size: 12px;
       color: var(--accent);
@@ -194,38 +241,29 @@
       user-select: all;
       line-height: 1.4;
     }
-    .btn-copy {
-      width: 100%;
-      padding: 8px;
-      background: var(--surface);
-      color: var(--blue);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-bottom: 6px;
-    }
-    .btn-copy:hover { background: var(--surface2); }
 
-    /* 脚本输出 */
-    .script-output {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 8px;
-      display: none;
-    }
-    .script-output pre {
-      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+    /* 原始响应折叠 */
+    .raw-toggle {
+      margin-top: 8px;
       font-size: 11px;
-      color: #c9d1d9;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    .raw-toggle:hover { color: var(--text); }
+    .raw-json {
+      margin-top: 6px;
+      background: var(--surface2);
+      border-radius: 4px;
+      padding: 8px;
+      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+      font-size: 10px;
+      color: #888;
       white-space: pre-wrap;
       word-break: break-all;
-      line-height: 1.5;
-      max-height: 240px;
+      max-height: 150px;
       overflow-y: auto;
+      display: none;
     }
 
     /* 说明区 */
@@ -236,9 +274,11 @@
       padding: 16px;
       margin-top: 20px;
     }
-    .instructions h3 {
+    .instructions summary {
       font-size: 14px;
       color: var(--orange);
+      font-weight: 600;
+      cursor: pointer;
       margin-bottom: 10px;
     }
     .instructions ol {
@@ -255,7 +295,7 @@
       font-size: 12px;
       color: var(--text);
     }
-    .instructions .highlight {
+    .instructions .hl {
       color: var(--accent);
       font-weight: 500;
     }
@@ -275,12 +315,24 @@
       <p>生成 ChatGPT Plus 免费试用 Stripe 结算链接</p>
     </div>
 
-    <div id="modeBadge" class="mode-badge script">
-      <span id="modeIcon">&#x1f4cb;</span>
-      <span id="modeText">脚本模式</span>
+    <!-- Token 输入 -->
+    <div class="token-card">
+      <label>
+        Access Token / Session
+        <span>
+          <button class="btn-clear" id="btnClear">清空</button>
+          <span class="token-status empty" id="tokenStatus">未识别</span>
+        </span>
+      </label>
+      <textarea class="token-input" id="tokenInput" placeholder="粘贴 accessToken 或从 chatgpt.com/api/auth/session 复制的整段 JSON..."></textarea>
+      <div class="token-hint">
+        获取方式：登录 chatgpt.com 后访问 <a href="https://chatgpt.com/api/auth/session" target="_blank">/api/auth/session</a>，复制页面内容粘贴到上方
+      </div>
     </div>
 
+    <!-- 配置 -->
     <div class="config-card">
+      <div class="section-label">生成配置</div>
       <div class="config-row">
         <div class="config-field">
           <label>账单国家</label>
@@ -325,98 +377,128 @@
       </div>
     </div>
 
-    <!-- 直接执行按钮（仅在 chatgpt.com 域上显示） -->
-    <button class="btn-primary" id="btnDirect" style="display:none">&#x1f680; 直接生成链接</button>
-
-    <!-- 脚本模式按钮（始终可用） -->
-    <button class="btn-primary" id="btnGenerate">&#x1f4cb; 生成控制台脚本</button>
+    <button class="btn-primary" id="btnGenerate">&#x1f680; 生成支付链接</button>
 
     <div class="status-box" id="status"></div>
 
-    <!-- 直接模式结果 -->
-    <div class="result-card" id="resultCard">
-      <div class="result-label">Stripe 结算链接</div>
-      <div class="result-url" id="resultUrl"></div>
+    <!-- 结果区 -->
+    <div class="result-section" id="resultSection">
+      <div class="result-item" id="stripeResult">
+        <div class="result-item-header">
+          <span class="result-item-title">Stripe 结算链接</span>
+          <div class="result-item-actions">
+            <button class="btn-sm" onclick="copyUrl('stripeUrl')">&#x1f4cb; 复制</button>
+            <button class="btn-sm green" onclick="openUrl('stripeUrl')">&#x1f517; 打开</button>
+          </div>
+        </div>
+        <div class="result-url" id="stripeUrl"></div>
+      </div>
+      <div class="result-item" id="chatgptResult">
+        <div class="result-item-header">
+          <span class="result-item-title">ChatGPT 站内链接</span>
+          <div class="result-item-actions">
+            <button class="btn-sm" onclick="copyUrl('chatgptUrl')">&#x1f4cb; 复制</button>
+            <button class="btn-sm green" onclick="openUrl('chatgptUrl')">&#x1f517; 打开</button>
+          </div>
+        </div>
+        <div class="result-url" id="chatgptUrl"></div>
+      </div>
+      <div class="result-item" id="openaiResult">
+        <div class="result-item-header">
+          <span class="result-item-title">OpenAI 原始链接</span>
+          <div class="result-item-actions">
+            <button class="btn-sm" onclick="copyUrl('openaiUrl')">&#x1f4cb; 复制</button>
+            <button class="btn-sm green" onclick="openUrl('openaiUrl')">&#x1f517; 打开</button>
+          </div>
+        </div>
+        <div class="result-url" id="openaiUrl"></div>
+      </div>
+      <div class="raw-toggle" id="rawToggle" onclick="toggleRaw()">&#x25b6; 查看原始响应</div>
+      <div class="raw-json" id="rawJson"></div>
     </div>
-    <button class="btn-copy" id="btnCopyUrl" style="display:none">&#x1f4cb; 复制链接</button>
-    <button class="btn-copy" id="btnOpenUrl" style="display:none">&#x1f517; 打开链接（新标签页）</button>
 
-    <!-- 脚本模式结果 -->
-    <div class="script-output" id="scriptOutput">
-      <div class="result-label" style="margin-bottom:8px">将以下脚本复制到 chatgpt.com 的浏览器控制台中执行</div>
-      <pre id="scriptCode"></pre>
-    </div>
-    <button class="btn-copy" id="btnCopyScript" style="display:none">&#x1f4cb; 复制脚本</button>
-
-    <!-- 使用说明 -->
-    <div class="instructions">
-      <h3>&#x1f4d6; 使用方法</h3>
+    <!-- 说明 -->
+    <details class="instructions">
+      <summary>&#x1f4d6; 使用说明</summary>
       <ol>
-        <li>配置好国家、币种、语言和促销 ID</li>
-        <li>点击 <span class="highlight">生成控制台脚本</span></li>
-        <li>复制生成的脚本</li>
-        <li>打开 <code>chatgpt.com</code> 并登录</li>
-        <li>按 <code>F12</code> 打开开发者工具 → <code>Console</code></li>
-        <li>粘贴脚本并回车执行</li>
-        <li>生成的 Stripe 结算链接会自动复制到剪贴板</li>
+        <li>登录 <code>chatgpt.com</code></li>
+        <li>访问 <a href="https://chatgpt.com/api/auth/session" target="_blank" style="color:var(--blue)">/api/auth/session</a>，复制页面内容</li>
+        <li>粘贴到上方 Token 输入框</li>
+        <li>选择配置，点击 <span class="hl">生成支付链接</span></li>
+        <li>打开生成的 Stripe 链接，完成绑卡</li>
       </ol>
-    </div>
+    </details>
 
     <div class="footer">仅供学习研究使用 · 需已登录 ChatGPT 且账号有试用资格</div>
   </div>
 
   <script>
   (function() {
-    /* ========== 域名检测 ========== */
-    var pageHost = '';
-    try { pageHost = new URL(window.location.href).hostname; } catch(_) {}
-    var isOnChatGPT = (pageHost === 'chatgpt.com' || pageHost.endsWith('.chatgpt.com'));
-
-    var modeBadge = document.getElementById('modeBadge');
-    var modeIcon = document.getElementById('modeIcon');
-    var modeText = document.getElementById('modeText');
-    var btnDirect = document.getElementById('btnDirect');
+    /* ========== DOM 引用 ========== */
+    var tokenInput = document.getElementById('tokenInput');
+    var tokenStatus = document.getElementById('tokenStatus');
     var btnGenerate = document.getElementById('btnGenerate');
-
-    if (isOnChatGPT) {
-      modeBadge.className = 'mode-badge direct';
-      modeIcon.textContent = '\u{1f680}';
-      modeText.textContent = '直接模式（当前在 chatgpt.com）';
-      btnDirect.style.display = 'block';
-    } else {
-      modeBadge.className = 'mode-badge script';
-      modeIcon.textContent = '\u{1f4cb}';
-      modeText.textContent = '脚本模式（需在 chatgpt.com 控制台执行）';
-      btnDirect.style.display = 'none';
-    }
+    var btnClear = document.getElementById('btnClear');
+    var statusEl = document.getElementById('status');
+    var resultSection = document.getElementById('resultSection');
 
     /* ========== 国家-币种联动 ========== */
     var countryCurrencyMap = { US: 'USD', AU: 'AUD', JP: 'JPY', GB: 'GBP' };
     var countryLocaleMap = { US: 'ja-JP', AU: 'ja-JP', JP: 'ja-JP', GB: 'en-US' };
 
-    var countrySelect = document.getElementById('country');
-    var currencySelect = document.getElementById('currency');
-    var localeSelect = document.getElementById('locale');
-
-    countrySelect.addEventListener('change', function() {
-      var c = countrySelect.value;
-      currencySelect.value = countryCurrencyMap[c] || 'USD';
-      localeSelect.value = countryLocaleMap[c] || 'ja-JP';
+    document.getElementById('country').addEventListener('change', function() {
+      var c = this.value;
+      document.getElementById('currency').value = countryCurrencyMap[c] || 'USD';
+      document.getElementById('locale').value = countryLocaleMap[c] || 'ja-JP';
     });
 
-    /* ========== 读取配置 ========== */
-    function getConfig() {
-      return {
-        country: countrySelect.value,
-        currency: currencySelect.value,
-        locale: localeSelect.value,
-        stripeLocale: document.getElementById('stripeLocale').value,
-        promoId: document.getElementById('promoId').value.trim() || 'plus-1-month-free'
-      };
+    /* ========== Token 解析 ========== */
+    function extractAccessToken(input) {
+      var text = (input || '').trim();
+      if (!text) return null;
+
+      /* 1. 尝试 JSON 解析 */
+      try {
+        var json = JSON.parse(text);
+        if (json.accessToken) return json.accessToken;
+        if (json.access_token) return json.access_token;
+      } catch(_) {}
+
+      /* 2. JWT 格式检测 (eyJ 开头) */
+      if (/^eyJ[A-Za-z0-9_-]+\./.test(text)) return text;
+
+      /* 3. 从文本中提取 JWT */
+      var match = text.match(/"accessToken"\s*:\s*"([^"]+)"/);
+      if (match) return match[1];
+
+      match = text.match(/(eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*)/);
+      if (match) return match[1];
+
+      return null;
     }
 
+    function updateTokenStatus() {
+      var token = extractAccessToken(tokenInput.value);
+      if (token) {
+        tokenStatus.textContent = '已识别';
+        tokenStatus.className = 'token-status ok';
+      } else if (tokenInput.value.trim()) {
+        tokenStatus.textContent = '未识别';
+        tokenStatus.className = 'token-status empty';
+      } else {
+        tokenStatus.textContent = '未识别';
+        tokenStatus.className = 'token-status empty';
+      }
+    }
+
+    tokenInput.addEventListener('input', updateTokenStatus);
+
+    btnClear.addEventListener('click', function() {
+      tokenInput.value = '';
+      updateTokenStatus();
+    });
+
     /* ========== 状态显示 ========== */
-    var statusEl = document.getElementById('status');
     function showStatus(msg, type) {
       statusEl.textContent = msg;
       statusEl.className = 'status-box ' + type;
@@ -426,164 +508,103 @@
       statusEl.className = 'status-box';
     }
 
-    /* ========== 直接模式：在 chatgpt.com 上直接执行 ========== */
-    var generatedUrl = null;
-
-    btnDirect.addEventListener('click', async function() {
-      generatedUrl = null;
-      document.getElementById('resultCard').style.display = 'none';
-      document.getElementById('btnCopyUrl').style.display = 'none';
-      document.getElementById('btnOpenUrl').style.display = 'none';
+    /* ========== 生成链接 ========== */
+    btnGenerate.addEventListener('click', async function() {
       hideStatus();
+      resultSection.className = 'result-section';
 
-      var config = getConfig();
-      btnDirect.disabled = true;
+      var accessToken = extractAccessToken(tokenInput.value);
+      if (!accessToken) {
+        showStatus('请先粘贴 accessToken 或 session JSON', 'error');
+        return;
+      }
+
+      var config = {
+        country: document.getElementById('country').value,
+        currency: document.getElementById('currency').value,
+        locale: document.getElementById('locale').value,
+        stripeLocale: document.getElementById('stripeLocale').value,
+        promoId: document.getElementById('promoId').value.trim() || 'plus-1-month-free'
+      };
+
+      btnGenerate.disabled = true;
       showStatus('\u23f3 正在生成链接...', 'loading');
 
       try {
-        /* 1. 获取 Access Token */
-        var session = await fetch('/api/auth/session').then(function(r) { return r.json(); });
-        var accessToken = session && session.accessToken;
-        if (!accessToken) {
-          showStatus('\u274c 获取 Token 失败: accessToken 为空，请检查是否已登录 ChatGPT', 'error');
-          return;
-        }
-
-        /* 2. 构造 Payload */
-        var payload = {
-          plan_name: 'chatgptplusplan',
-          billing_details: { country: config.country, currency: config.currency },
-          cancel_url: 'https://chatgpt.com/#pricing',
-          promo_campaign: {
-            promo_campaign_id: config.promoId,
-            is_coupon_from_query_param: false
-          },
-          checkout_ui_mode: 'hosted',
-          locale: config.locale
-        };
-
-        /* 3. 发送请求 */
-        var response = await fetch('https://chatgpt.com/backend-api/payments/checkout', {
+        var response = await fetch('/api/generate', {
           method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/json',
-            'Accept-Language': config.locale + ',ja;q=0.9'
-          },
-          body: JSON.stringify(payload)
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ accessToken: accessToken, config: config })
         });
 
         var data = await response.json();
-        if (!response.ok) {
-          showStatus('\u274c 请求失败: ' + JSON.stringify(data), 'error');
+
+        if (!data.success) {
+          showStatus('\u274c ' + (data.error || '生成失败'), 'error');
           return;
         }
 
-        /* 4. 提取链接 */
-        var hostedUrl = data.url || data.stripe_hosted_url || data.checkout_url;
-        if (hostedUrl) {
-          var urlObj = new URL(hostedUrl);
-          urlObj.searchParams.set('locale', config.stripeLocale);
-          generatedUrl = urlObj.toString();
+        showStatus('\u2705 链接生成成功！', 'success');
 
-          showStatus('\u2705 链接生成成功！', 'success');
-          document.getElementById('resultUrl').textContent = generatedUrl;
-          document.getElementById('resultCard').style.display = 'block';
-          document.getElementById('btnCopyUrl').style.display = 'block';
-          document.getElementById('btnOpenUrl').style.display = 'block';
-        } else {
-          showStatus('\u274c 未找到结算链接，请检查账号是否有试用资格或已订阅过 Plus', 'error');
+        /* Stripe 链接（注入 locale） */
+        var stripeUrl = data.stripe_url || '';
+        if (stripeUrl) {
+          try {
+            var urlObj = new URL(stripeUrl);
+            urlObj.searchParams.set('locale', config.stripeLocale);
+            stripeUrl = urlObj.toString();
+          } catch(_) {}
         }
+        document.getElementById('stripeUrl').textContent = stripeUrl;
+
+        /* ChatGPT 站内链接 */
+        document.getElementById('chatgptUrl').textContent = data.chatgpt_url || '';
+
+        /* OpenAI 原始链接 */
+        document.getElementById('openaiUrl').textContent = data.openai_url || '';
+
+        /* 原始响应 */
+        document.getElementById('rawJson').textContent = JSON.stringify(data.raw || {}, null, 2);
+
+        resultSection.className = 'result-section show';
+
       } catch (e) {
         showStatus('\u274c 网络异常: ' + e.message, 'error');
       } finally {
-        btnDirect.disabled = false;
+        btnGenerate.disabled = false;
       }
     });
 
-    /* 复制链接 */
-    document.getElementById('btnCopyUrl').addEventListener('click', function() {
-      if (!generatedUrl) return;
-      navigator.clipboard.writeText(generatedUrl).then(function() {
-        var btn = document.getElementById('btnCopyUrl');
-        btn.textContent = '\u2705 已复制';
-        setTimeout(function() { btn.textContent = '\u{1f4cb} 复制链接'; }, 1500);
+    /* ========== 工具函数（挂到全局供 onclick 使用）========== */
+    window.copyUrl = function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var text = el.textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        /* 短暂反馈 */
+        var orig = el.textContent;
+        el.textContent = '\u2705 已复制';
+        setTimeout(function() { el.textContent = orig; }, 800);
       }).catch(function() {});
-    });
+    };
 
-    /* 打开链接 */
-    document.getElementById('btnOpenUrl').addEventListener('click', function() {
-      if (!generatedUrl) return;
-      window.open(generatedUrl, '_blank');
-    });
+    window.openUrl = function(id) {
+      var el = document.getElementById(id);
+      if (!el || !el.textContent) return;
+      window.open(el.textContent, '_blank');
+    };
 
-    /* ========== 脚本模式：生成控制台脚本 ========== */
-    btnGenerate.addEventListener('click', function() {
-      var config = getConfig();
-      hideStatus();
-      document.getElementById('scriptOutput').style.display = 'block';
-
-      /* 生成自包含的 IIFE 脚本 */
-      var script = [
-        '(async function() {',
-        '  try {',
-        '    var session = await fetch("/api/auth/session").then(function(r) { return r.json(); });',
-        '    var accessToken = session && session.accessToken;',
-        '    if (!accessToken) { console.error("❌ 未获取到 accessToken，请确认已登录 ChatGPT"); return; }',
-        '',
-        '    var payload = {',
-        '      plan_name: "chatgptplusplan",',
-        '      billing_details: { country: "' + config.country + '", currency: "' + config.currency + '" },',
-        '      cancel_url: "https://chatgpt.com/#pricing",',
-        '      promo_campaign: { promo_campaign_id: "' + config.promoId + '", is_coupon_from_query_param: false },',
-        '      checkout_ui_mode: "hosted",',
-        '      locale: "' + config.locale + '"',
-        '    };',
-        '',
-        '    var response = await fetch("https://chatgpt.com/backend-api/payments/checkout", {',
-        '      method: "POST",',
-        '      headers: {',
-        '        "Authorization": "Bearer " + accessToken,',
-        '        "Content-Type": "application/json",',
-        '        "Accept-Language": "' + config.locale + ',ja;q=0.9"',
-        '      },',
-        '      body: JSON.stringify(payload)',
-        '    });',
-        '',
-        '    var data = await response.json();',
-        '    if (!response.ok) { console.error("❌ 请求失败:", JSON.stringify(data)); return; }',
-        '',
-        '    var url = data.url || data.stripe_hosted_url || data.checkout_url;',
-        '    if (url) {',
-        '      var urlObj = new URL(url);',
-        '      urlObj.searchParams.set("locale", "' + config.stripeLocale + '");',
-        '      var finalUrl = urlObj.toString();',
-        '      try { await navigator.clipboard.writeText(finalUrl); } catch(_) {}',
-        '      console.log("✅ 结算链接（已复制到剪贴板）:\\n" + finalUrl);',
-        '      window.open(finalUrl, "_blank");',
-        '    } else {',
-        '      console.error("❌ 未找到结算链接，请检查账号是否有试用资格");',
-        '    }',
-        '  } catch (e) {',
-        '    console.error("❌ 异常:", e.message);',
-        '  }',
-        '})();'
-      ].join('\n');
-
-      document.getElementById('scriptCode').textContent = script;
-      document.getElementById('btnCopyScript').style.display = 'block';
-      showStatus('\u2705 脚本已生成，请复制到 chatgpt.com 的控制台执行', 'success');
-    });
-
-    /* 复制脚本 */
-    document.getElementById('btnCopyScript').addEventListener('click', function() {
-      var scriptText = document.getElementById('scriptCode').textContent;
-      navigator.clipboard.writeText(scriptText).then(function() {
-        var btn = document.getElementById('btnCopyScript');
-        btn.textContent = '\u2705 已复制';
-        setTimeout(function() { btn.textContent = '\u{1f4cb} 复制脚本'; }, 1500);
-      }).catch(function() {});
-    });
+    window.toggleRaw = function() {
+      var raw = document.getElementById('rawJson');
+      var toggle = document.getElementById('rawToggle');
+      if (raw.style.display === 'block') {
+        raw.style.display = 'none';
+        toggle.textContent = '\u25b6 查看原始响应';
+      } else {
+        raw.style.display = 'block';
+        toggle.textContent = '\u25bc 收起原始响应';
+      }
+    };
 
   })();
   </script>
