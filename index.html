@@ -434,6 +434,10 @@
 
   <script>
   (function() {
+    /* ========== Worker API 地址 ========== */
+    // 部署 Worker 后替换为你的 Worker URL
+    var WORKER_URL = 'https://trial-api.你的账号名.workers.dev';
+
     /* ========== DOM 引用 ========== */
     var tokenInput = document.getElementById('tokenInput');
     var tokenStatus = document.getElementById('tokenStatus');
@@ -531,7 +535,7 @@
       showStatus('\u23f3 正在生成链接...', 'loading');
 
       try {
-        var response = await fetch('/api/generate', {
+        var response = await fetch(WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ accessToken: accessToken, config: config })
