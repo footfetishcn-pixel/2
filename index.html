@@ -318,10 +318,22 @@
     /* ========== 检测 Worker 可用性 ========== */
     function checkWorker() {
       var controller = new AbortController();
-      var timeout = setTimeout(function() { controller.abort(); }, 5000);
-      fetch(WORKER_URL, { method: 'OPTIONS', signal: controller.signal }).then(function(r) {
+      var timeout = setTimeout(function() { controller.abort(); }, 8000);
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: '__probe__', config: { country: 'US' } }),
+        signal: controller.signal
+      }).then(function(r) {
         clearTimeout(timeout);
-        workerAvailable = r.ok;
+        return r.json();
+      }).then(function(data) {
+        /* Worker 响应了，检查是否被 ChatGPT 拦截 */
+        if (data.blocked) {
+          workerAvailable = false;
+        } else {
+          workerAvailable = true;
+        }
         updateModeBadge();
       }).catch(function() {
         clearTimeout(timeout);
@@ -338,7 +350,7 @@
       } else {
         modeBadge.className = 'mode-badge script';
         modeIcon.textContent = '\u{1f4cb}';
-        modeText.textContent = workerAvailable === false ? '脚本模式（服务器不可用）' : '检测中...';
+        modeText.textContent = workerAvailable === false ? '脚本模式（服务器被拦截）' : '检测中...';
       }
     }
 
@@ -409,7 +421,12 @@
 
           var data = await response.json();
 
-          if (data.success) {
+          if (data.blocked) {
+            /* Worker 被 Cloudflare 拦截，切换脚本模式 */
+            workerAvailable = false;
+            updateModeBadge();
+            /* 继续往下走脚本模式 */
+          } else if (data.success) {
             showStatus('\u2705 链接生成成功！', 'success');
 
             var stripeUrl = data.stripe_url || '';
@@ -482,7 +499,7 @@
 
       document.getElementById('scriptCode').textContent = script;
       scriptSection.className = 'script-section show';
-      showStatus('\u26a0\ufe0f 服务器不可用，已生成控制台脚本，请在 chatgpt.com 控制台执行', 'warn');
+      showStatus('\u26a0\ufe0f 服务器被 ChatGPT Cloudflare 拦截，已自动生成控制台脚本，请在 chatgpt.com 控制台执行', 'warn');
       btnGenerate.disabled = false;
     });
 
