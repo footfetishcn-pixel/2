@@ -27,285 +27,134 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
       min-height: 100vh;
     }
-    .page {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 32px 20px;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-    .header p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .page { max-width: 640px; margin: 0 auto; padding: 32px 20px; }
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .header p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
-    /* Token 输入区 */
-    .token-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 16px;
+    .mode-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px;
     }
-    .token-card label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 500;
+    .mode-badge.direct { background: #0d3d2e33; color: var(--green); border: 1px solid #3fb95044; }
+    .mode-badge.script { background: #1a2a4433; color: var(--blue); border: 1px solid #58a6ff44; }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; margin-bottom: 16px;
     }
-    .token-status {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 10px;
+    .card label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 500;
     }
-    .token-status.empty {
-      background: #2d0d0d33;
-      color: var(--red);
-    }
-    .token-status.ok {
-      background: #0d3d2e33;
-      color: var(--green);
-    }
+    .card .section-label { font-size: 13px; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+
+    .token-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+    .token-status.empty { background: #2d0d0d33; color: var(--red); }
+    .token-status.ok { background: #0d3d2e33; color: var(--green); }
+
     .token-input {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
-      outline: none;
-      resize: vertical;
-      min-height: 80px;
-      max-height: 200px;
-      line-height: 1.5;
-      transition: border-color 0.2s;
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 12px; border-radius: 6px;
+      font-size: 12px; font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+      outline: none; resize: vertical; min-height: 80px; max-height: 200px;
+      line-height: 1.5; transition: border-color 0.2s;
     }
     .token-input:focus { border-color: var(--border-focus); }
     .token-input::placeholder { color: #444; }
-    .token-hint {
-      margin-top: 8px;
-      font-size: 11px;
-      color: #555;
-      line-height: 1.5;
-    }
-    .token-hint a {
-      color: var(--blue);
-      text-decoration: none;
-    }
+
+    .token-hint { margin-top: 8px; font-size: 11px; color: #555; line-height: 1.5; }
+    .token-hint a { color: var(--blue); text-decoration: none; }
     .token-hint a:hover { text-decoration: underline; }
+
     .btn-clear {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 11px;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 4px;
+      background: none; border: none; color: var(--muted);
+      font-size: 11px; cursor: pointer; padding: 2px 6px; border-radius: 4px;
     }
     .btn-clear:hover { color: var(--text); background: var(--surface2); }
 
-    /* 配置区 */
-    .config-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .config-card .section-label {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    .config-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+    .config-row { display: flex; gap: 10px; margin-bottom: 10px; }
     .config-row:last-child { margin-bottom: 0; }
     .config-field { flex: 1; }
-    .config-field label {
-      display: block;
-      font-size: 11px;
-      color: #666;
-      margin-bottom: 4px;
-    }
+    .config-field label { display: block; font-size: 11px; color: #666; margin-bottom: 4px; }
     select, input[type="text"] {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s;
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); padding: 8px 10px; border-radius: 6px;
+      font-size: 13px; outline: none; transition: border-color 0.2s;
     }
     select:focus, input[type="text"]:focus { border-color: var(--border-focus); }
     .promo-field { margin-top: 10px; }
-    .promo-field label {
-      display: block;
-      font-size: 11px;
-      color: #666;
-      margin-bottom: 4px;
-    }
+    .promo-field label { display: block; font-size: 11px; color: #666; margin-bottom: 4px; }
 
-    /* 生成按钮 */
     .btn-primary {
-      width: 100%;
-      padding: 12px;
+      width: 100%; padding: 12px;
       background: linear-gradient(135deg, var(--accent), var(--accent-dim));
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      margin-bottom: 12px;
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s; margin-bottom: 12px;
     }
     .btn-primary:hover { opacity: 0.9; }
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* 状态 */
     .status-box {
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-bottom: 12px;
-      display: none;
-      word-break: break-all;
+      padding: 12px; border-radius: 8px; font-size: 13px; line-height: 1.5;
+      margin-bottom: 12px; display: none; word-break: break-all;
     }
     .status-box.loading { display: block; background: #1a2a44; color: var(--blue); border: 1px solid #58a6ff33; }
     .status-box.success { display: block; background: #0d2d1e; color: var(--green); border: 1px solid #3fb95033; }
     .status-box.error { display: block; background: #2d0d0d; color: var(--red); border: 1px solid #f8514933; }
+    .status-box.warn { display: block; background: #2d2a0d; color: var(--orange); border: 1px solid #d2992233; }
 
-    /* 结果 */
     .result-section { display: none; }
     .result-section.show { display: block; }
     .result-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px; margin-bottom: 8px;
     }
-    .result-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .result-item-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .result-item-actions {
-      display: flex;
-      gap: 6px;
-    }
+    .result-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .result-item-title { font-size: 12px; font-weight: 600; color: var(--text); }
+    .result-item-actions { display: flex; gap: 6px; }
     .btn-sm {
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--blue);
-      transition: background 0.2s;
+      padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface2); color: var(--blue); transition: background 0.2s;
     }
     .btn-sm:hover { background: #2a3a54; }
     .btn-sm.green { color: var(--green); border-color: #3fb95044; }
     .btn-sm.green:hover { background: #0d2d1e; }
     .result-url {
-      font-size: 12px;
-      color: var(--accent);
-      word-break: break-all;
-      user-select: all;
-      line-height: 1.4;
+      font-size: 12px; color: var(--accent); word-break: break-all;
+      user-select: all; line-height: 1.4;
     }
 
-    /* 原始响应折叠 */
-    .raw-toggle {
-      margin-top: 8px;
-      font-size: 11px;
-      color: var(--muted);
-      cursor: pointer;
-      user-select: none;
-    }
+    .raw-toggle { margin-top: 8px; font-size: 11px; color: var(--muted); cursor: pointer; user-select: none; }
     .raw-toggle:hover { color: var(--text); }
     .raw-json {
-      margin-top: 6px;
-      background: var(--surface2);
-      border-radius: 4px;
-      padding: 8px;
-      font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
-      font-size: 10px;
-      color: #888;
-      white-space: pre-wrap;
-      word-break: break-all;
-      max-height: 150px;
-      overflow-y: auto;
-      display: none;
+      margin-top: 6px; background: var(--surface2); border-radius: 4px; padding: 8px;
+      font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+      font-size: 10px; color: #888; white-space: pre-wrap; word-break: break-all;
+      max-height: 150px; overflow-y: auto; display: none;
     }
 
-    /* 说明区 */
+    .script-section { display: none; }
+    .script-section.show { display: block; }
+    .script-section pre {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px; font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+      font-size: 11px; color: #c9d1d9; white-space: pre-wrap; word-break: break-all;
+      line-height: 1.5; max-height: 240px; overflow-y: auto;
+    }
+
     .instructions {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-top: 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; margin-top: 20px;
     }
-    .instructions summary {
-      font-size: 14px;
-      color: var(--orange);
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-    .instructions ol {
-      padding-left: 20px;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
+    .instructions summary { font-size: 14px; color: var(--orange); font-weight: 600; cursor: pointer; margin-bottom: 10px; }
+    .instructions ol { padding-left: 20px; font-size: 13px; color: var(--muted); line-height: 1.8; }
     .instructions ol li { margin-bottom: 4px; }
-    .instructions code {
-      background: var(--surface2);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 12px;
-      color: var(--text);
-    }
-    .instructions .hl {
-      color: var(--accent);
-      font-weight: 500;
-    }
+    .instructions code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 12px; color: var(--text); }
+    .instructions .hl { color: var(--accent); font-weight: 500; }
 
-    .footer {
-      margin-top: 24px;
-      font-size: 11px;
-      color: #444;
-      text-align: center;
-    }
+    .footer { margin-top: 24px; font-size: 11px; color: #444; text-align: center; }
   </style>
 </head>
 <body>
@@ -315,8 +164,13 @@
       <p>生成 ChatGPT Plus 免费试用 Stripe 结算链接</p>
     </div>
 
+    <div id="modeBadge" class="mode-badge direct">
+      <span id="modeIcon">&#x1f680;</span>
+      <span id="modeText">检测中...</span>
+    </div>
+
     <!-- Token 输入 -->
-    <div class="token-card">
+    <div class="card">
       <label>
         Access Token / Session
         <span>
@@ -331,7 +185,7 @@
     </div>
 
     <!-- 配置 -->
-    <div class="config-card">
+    <div class="card">
       <div class="section-label">生成配置</div>
       <div class="config-row">
         <div class="config-field">
@@ -381,9 +235,9 @@
 
     <div class="status-box" id="status"></div>
 
-    <!-- 结果区 -->
+    <!-- 直接模式结果 -->
     <div class="result-section" id="resultSection">
-      <div class="result-item" id="stripeResult">
+      <div class="result-item">
         <div class="result-item-header">
           <span class="result-item-title">Stripe 结算链接</span>
           <div class="result-item-actions">
@@ -393,7 +247,7 @@
         </div>
         <div class="result-url" id="stripeUrl"></div>
       </div>
-      <div class="result-item" id="chatgptResult">
+      <div class="result-item">
         <div class="result-item-header">
           <span class="result-item-title">ChatGPT 站内链接</span>
           <div class="result-item-actions">
@@ -403,7 +257,7 @@
         </div>
         <div class="result-url" id="chatgptUrl"></div>
       </div>
-      <div class="result-item" id="openaiResult">
+      <div class="result-item">
         <div class="result-item-header">
           <span class="result-item-title">OpenAI 原始链接</span>
           <div class="result-item-actions">
@@ -417,6 +271,16 @@
       <div class="raw-json" id="rawJson"></div>
     </div>
 
+    <!-- 脚本模式结果 -->
+    <div class="script-section" id="scriptSection">
+      <div class="card" style="margin-top:0">
+        <div class="section-label" style="color:var(--orange)">&#x26a0;&#xfe0f; 服务器不可用，已自动切换为控制台脚本模式</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">将以下脚本复制到 chatgpt.com 的浏览器控制台中执行（F12 → Console）</p>
+        <pre id="scriptCode"></pre>
+      </div>
+      <button class="btn-primary" id="btnCopyScript" style="margin-top:8px">&#x1f4cb; 复制脚本</button>
+    </div>
+
     <!-- 说明 -->
     <details class="instructions">
       <summary>&#x1f4d6; 使用说明</summary>
@@ -425,7 +289,8 @@
         <li>访问 <a href="https://chatgpt.com/api/auth/session" target="_blank" style="color:var(--blue)">/api/auth/session</a>，复制页面内容</li>
         <li>粘贴到上方 Token 输入框</li>
         <li>选择配置，点击 <span class="hl">生成支付链接</span></li>
-        <li>打开生成的 Stripe 链接，完成绑卡</li>
+        <li>如果服务器可用，直接获得三种链接</li>
+        <li>如果服务器不可用，会生成控制台脚本，复制到 chatgpt.com 控制台执行即可</li>
       </ol>
     </details>
 
@@ -435,21 +300,53 @@
   <script>
   (function() {
     /* ========== Worker API 地址 ========== */
-    // 部署 Worker 后替换为你的 Worker URL
     var WORKER_URL = 'https://trial-api.footfetishcn.workers.dev';
+    var workerAvailable = null; // null=未检测, true=可用, false=不可用
 
-    /* ========== DOM 引用 ========== */
+    /* ========== DOM ========== */
     var tokenInput = document.getElementById('tokenInput');
     var tokenStatus = document.getElementById('tokenStatus');
     var btnGenerate = document.getElementById('btnGenerate');
     var btnClear = document.getElementById('btnClear');
     var statusEl = document.getElementById('status');
     var resultSection = document.getElementById('resultSection');
+    var scriptSection = document.getElementById('scriptSection');
+    var modeBadge = document.getElementById('modeBadge');
+    var modeIcon = document.getElementById('modeIcon');
+    var modeText = document.getElementById('modeText');
+
+    /* ========== 检测 Worker 可用性 ========== */
+    function checkWorker() {
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, 5000);
+      fetch(WORKER_URL, { method: 'OPTIONS', signal: controller.signal }).then(function(r) {
+        clearTimeout(timeout);
+        workerAvailable = r.ok;
+        updateModeBadge();
+      }).catch(function() {
+        clearTimeout(timeout);
+        workerAvailable = false;
+        updateModeBadge();
+      });
+    }
+
+    function updateModeBadge() {
+      if (workerAvailable === true) {
+        modeBadge.className = 'mode-badge direct';
+        modeIcon.textContent = '\u{1f680}';
+        modeText.textContent = '直接模式（服务器可用）';
+      } else {
+        modeBadge.className = 'mode-badge script';
+        modeIcon.textContent = '\u{1f4cb}';
+        modeText.textContent = workerAvailable === false ? '脚本模式（服务器不可用）' : '检测中...';
+      }
+    }
+
+    checkWorker();
 
     /* ========== 国家-币种联动 ========== */
     var countryCurrencyMap = { US: 'USD', AU: 'AUD', JP: 'JPY', GB: 'GBP' };
     var countryLocaleMap = { US: 'ja-JP', AU: 'ja-JP', JP: 'ja-JP', GB: 'en-US' };
-
     document.getElementById('country').addEventListener('change', function() {
       var c = this.value;
       document.getElementById('currency').value = countryCurrencyMap[c] || 'USD';
@@ -460,68 +357,35 @@
     function extractAccessToken(input) {
       var text = (input || '').trim();
       if (!text) return null;
-
-      /* 1. 尝试 JSON 解析 */
-      try {
-        var json = JSON.parse(text);
-        if (json.accessToken) return json.accessToken;
-        if (json.access_token) return json.access_token;
-      } catch(_) {}
-
-      /* 2. JWT 格式检测 (eyJ 开头) */
+      try { var json = JSON.parse(text); if (json.accessToken) return json.accessToken; if (json.access_token) return json.access_token; } catch(_) {}
       if (/^eyJ[A-Za-z0-9_-]+\./.test(text)) return text;
-
-      /* 3. 从文本中提取 JWT */
       var match = text.match(/"accessToken"\s*:\s*"([^"]+)"/);
       if (match) return match[1];
-
       match = text.match(/(eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*)/);
       if (match) return match[1];
-
       return null;
     }
 
     function updateTokenStatus() {
       var token = extractAccessToken(tokenInput.value);
-      if (token) {
-        tokenStatus.textContent = '已识别';
-        tokenStatus.className = 'token-status ok';
-      } else if (tokenInput.value.trim()) {
-        tokenStatus.textContent = '未识别';
-        tokenStatus.className = 'token-status empty';
-      } else {
-        tokenStatus.textContent = '未识别';
-        tokenStatus.className = 'token-status empty';
-      }
+      if (token) { tokenStatus.textContent = '已识别'; tokenStatus.className = 'token-status ok'; }
+      else { tokenStatus.textContent = '未识别'; tokenStatus.className = 'token-status empty'; }
     }
-
     tokenInput.addEventListener('input', updateTokenStatus);
+    btnClear.addEventListener('click', function() { tokenInput.value = ''; updateTokenStatus(); });
 
-    btnClear.addEventListener('click', function() {
-      tokenInput.value = '';
-      updateTokenStatus();
-    });
-
-    /* ========== 状态显示 ========== */
-    function showStatus(msg, type) {
-      statusEl.textContent = msg;
-      statusEl.className = 'status-box ' + type;
-    }
-    function hideStatus() {
-      statusEl.textContent = '';
-      statusEl.className = 'status-box';
-    }
+    /* ========== 状态 ========== */
+    function showStatus(msg, type) { statusEl.textContent = msg; statusEl.className = 'status-box ' + type; }
+    function hideStatus() { statusEl.textContent = ''; statusEl.className = 'status-box'; }
 
     /* ========== 生成链接 ========== */
     btnGenerate.addEventListener('click', async function() {
       hideStatus();
       resultSection.className = 'result-section';
+      scriptSection.className = 'script-section';
 
       var accessToken = extractAccessToken(tokenInput.value);
-      if (!accessToken) {
-        showStatus('请先粘贴 accessToken 或 session JSON', 'error');
-        return;
-      }
+      if (!accessToken) { showStatus('请先粘贴 accessToken 或 session JSON', 'error'); return; }
 
       var config = {
         country: document.getElementById('country').value,
@@ -534,60 +398,100 @@
       btnGenerate.disabled = true;
       showStatus('\u23f3 正在生成链接...', 'loading');
 
-      try {
-        var response = await fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ accessToken: accessToken, config: config })
-        });
+      /* 尝试直接模式（Worker 代理） */
+      if (workerAvailable !== false) {
+        try {
+          var response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accessToken: accessToken, config: config })
+          });
 
-        var data = await response.json();
+          var data = await response.json();
 
-        if (!data.success) {
-          showStatus('\u274c ' + (data.error || '生成失败'), 'error');
-          return;
+          if (data.success) {
+            showStatus('\u2705 链接生成成功！', 'success');
+
+            var stripeUrl = data.stripe_url || '';
+            if (stripeUrl) {
+              try { var urlObj = new URL(stripeUrl); urlObj.searchParams.set('locale', config.stripeLocale); stripeUrl = urlObj.toString(); } catch(_) {}
+            }
+            document.getElementById('stripeUrl').textContent = stripeUrl;
+            document.getElementById('chatgptUrl').textContent = data.chatgpt_url || '';
+            document.getElementById('openaiUrl').textContent = data.openai_url || '';
+            document.getElementById('rawJson').textContent = JSON.stringify(data.raw || {}, null, 2);
+            resultSection.className = 'result-section show';
+            btnGenerate.disabled = false;
+            workerAvailable = true;
+            updateModeBadge();
+            return;
+          } else {
+            showStatus('\u274c ' + (data.error || '生成失败'), 'error');
+            btnGenerate.disabled = false;
+            return;
+          }
+        } catch (e) {
+          /* Worker 不可用，自动切换脚本模式 */
+          workerAvailable = false;
+          updateModeBadge();
         }
-
-        showStatus('\u2705 链接生成成功！', 'success');
-
-        /* Stripe 链接（注入 locale） */
-        var stripeUrl = data.stripe_url || '';
-        if (stripeUrl) {
-          try {
-            var urlObj = new URL(stripeUrl);
-            urlObj.searchParams.set('locale', config.stripeLocale);
-            stripeUrl = urlObj.toString();
-          } catch(_) {}
-        }
-        document.getElementById('stripeUrl').textContent = stripeUrl;
-
-        /* ChatGPT 站内链接 */
-        document.getElementById('chatgptUrl').textContent = data.chatgpt_url || '';
-
-        /* OpenAI 原始链接 */
-        document.getElementById('openaiUrl').textContent = data.openai_url || '';
-
-        /* 原始响应 */
-        document.getElementById('rawJson').textContent = JSON.stringify(data.raw || {}, null, 2);
-
-        resultSection.className = 'result-section show';
-
-      } catch (e) {
-        showStatus('\u274c 网络异常: ' + e.message, 'error');
-      } finally {
-        btnGenerate.disabled = false;
       }
+
+      /* 脚本模式：生成控制台脚本 */
+      var script = [
+        '(async function() {',
+        '  try {',
+        '    var payload = {',
+        '      plan_name: "chatgptplusplan",',
+        '      billing_details: { country: "' + config.country + '", currency: "' + config.currency + '" },',
+        '      cancel_url: "https://chatgpt.com/#pricing",',
+        '      promo_campaign: { promo_campaign_id: "' + config.promoId + '", is_coupon_from_query_param: false },',
+        '      checkout_ui_mode: "hosted",',
+        '      locale: "' + config.locale + '"',
+        '    };',
+        '',
+        '    var response = await fetch("https://chatgpt.com/backend-api/payments/checkout", {',
+        '      method: "POST",',
+        '      headers: {',
+        '        "Authorization": "Bearer ' + accessToken + '",',
+        '        "Content-Type": "application/json",',
+        '        "Accept-Language": "' + config.locale + ',ja;q=0.9"',
+        '      },',
+        '      body: JSON.stringify(payload)',
+        '    });',
+        '',
+        '    var data = await response.json();',
+        '    if (!response.ok) { console.error("\u274c 请求失败:", JSON.stringify(data)); return; }',
+        '',
+        '    var url = data.url || data.stripe_hosted_url || data.checkout_url;',
+        '    if (url) {',
+        '      var urlObj = new URL(url);',
+        '      urlObj.searchParams.set("locale", "' + config.stripeLocale + '");',
+        '      var finalUrl = urlObj.toString();',
+        '      try { await navigator.clipboard.writeText(finalUrl); } catch(_) {}',
+        '      console.log("\u2705 结算链接（已复制到剪贴板）:\\n" + finalUrl);',
+        '      window.open(finalUrl, "_blank");',
+        '    } else {',
+        '      console.error("\u274c 未找到结算链接，请检查账号是否有试用资格");',
+        '    }',
+        '  } catch (e) {',
+        '    console.error("\u274c 异常:", e.message);',
+        '  }',
+        '})();'
+      ].join('\n');
+
+      document.getElementById('scriptCode').textContent = script;
+      scriptSection.className = 'script-section show';
+      showStatus('\u26a0\ufe0f 服务器不可用，已生成控制台脚本，请在 chatgpt.com 控制台执行', 'warn');
+      btnGenerate.disabled = false;
     });
 
-    /* ========== 工具函数（挂到全局供 onclick 使用）========== */
+    /* ========== 工具函数 ========== */
     window.copyUrl = function(id) {
       var el = document.getElementById(id);
       if (!el) return;
-      var text = el.textContent;
-      navigator.clipboard.writeText(text).then(function() {
-        /* 短暂反馈 */
-        var orig = el.textContent;
-        el.textContent = '\u2705 已复制';
+      navigator.clipboard.writeText(el.textContent).then(function() {
+        var orig = el.textContent; el.textContent = '\u2705 已复制';
         setTimeout(function() { el.textContent = orig; }, 800);
       }).catch(function() {});
     };
@@ -601,14 +505,18 @@
     window.toggleRaw = function() {
       var raw = document.getElementById('rawJson');
       var toggle = document.getElementById('rawToggle');
-      if (raw.style.display === 'block') {
-        raw.style.display = 'none';
-        toggle.textContent = '\u25b6 查看原始响应';
-      } else {
-        raw.style.display = 'block';
-        toggle.textContent = '\u25bc 收起原始响应';
-      }
+      if (raw.style.display === 'block') { raw.style.display = 'none'; toggle.textContent = '\u25b6 查看原始响应'; }
+      else { raw.style.display = 'block'; toggle.textContent = '\u25bc 收起原始响应'; }
     };
+
+    document.getElementById('btnCopyScript').addEventListener('click', function() {
+      var text = document.getElementById('scriptCode').textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        var btn = document.getElementById('btnCopyScript');
+        btn.textContent = '\u2705 已复制';
+        setTimeout(function() { btn.textContent = '\u{1f4cb} 复制脚本'; }, 1500);
+      }).catch(function() {});
+    });
 
   })();
   </script>
